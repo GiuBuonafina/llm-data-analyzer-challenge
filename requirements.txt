@@ -7,3 +7,6 @@ pyodbc
 tabulate
 pytest
 streamlit
+matplotlib
+seaborn
+plotly

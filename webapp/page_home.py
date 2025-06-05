@@ -34,12 +34,12 @@ A proposta é simples e poderosa: permitir que qualquer pessoa consulte e analis
 O LLM Data Analyzer é uma aplicação de análise de dados conversacional que utiliza Inteligência Artificial Generativa para interpretar perguntas em linguagem natural, gerar automaticamente consultas SQL, executar essas consultas em um banco relacional na nuvem e retornar respostas claras e justificadas ao usuário.
 
 ### Funcionalidades Principais
-- Interface Conversacional Interativa com suporte a múltiplas perguntas por sessão
-- Geração Automática de SQL via LLM (Azure OpenAI com GPT-4o mini)
-- Execução Dinâmica de Consultas em banco SQL hospedado na Azure SQL Database
-- Retorno em Linguagem Natural, com explicações amigáveis e contextualizadas
-- Histórico de Conversa Preservado durante a navegação
-- Arquitetura Flexível, permitindo fácil adaptação a novos datasets e domínios
+- Chat inteligente com múltiplas perguntas por sessão
+- Geração automática de SQL (GPT-4o mini - Azure OpenAI)
+- Execução em banco relacional (Azure SQL Database)
+- Respostas em linguagem natural com explicações
+- Histórico de conversa persistente
+- Criação automática de gráficos (matplotlib, seaborn ou plotly) com base nos resultados
 
 ### Tecnologias Utilizadas
 - **Azure OpenAI** (modelo GPT-4o mini) para interpretação e geração de linguagem natural

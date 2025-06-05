@@ -117,6 +117,7 @@ streamlit run webapp/page_home.py
 Acesse o endereço exibido no terminal (geralmente http://localhost:8501) para usar a interface web, que inclui:
 - Página inicial com detalhes do projeto e da desenvolvedora
 - Página de chatbot com histórico, sugestões e visual de chat moderno
+- **Geração automática de gráficos com IA:** após uma consulta bem-sucedida, você pode clicar em "Gerar gráfico com IA" e o sistema utiliza uma LLM para criar e exibir um gráfico relevante com base nos dados retornados.
 
 ---
 
@@ -135,15 +136,14 @@ pytest
 - **Terminal funcional:** O projeto pode ser usado totalmente via terminal, útil para ambientes sem interface gráfica.
 - **Testes unitários:** Cobrem funções críticas de banco e LLM.
 - **Configuração segura:** Uso de `.env` para segredos e exemplos para facilitar onboarding.
+- **Geração de gráficos com IA:** O usuário pode solicitar que a IA gere automaticamente um gráfico relevante a partir dos dados retornados pela consulta SQL, tornando a análise ainda mais visual e intuitiva.
 
 ---
 
 ## 🚧 Desafios enfrentados
 
 - **Conexão com Azure SQL Database:** O banco em nuvem pode demorar para responder (especialmente em modo serverless), exigindo aumento de timeout e tratamento de tentativas de conexão.
-- **Extração robusta de SQL da resposta da LLM:** Garantir que a consulta gerada seja válida e segura para execução.
-- **Documentação e onboarding:** Facilitar o uso para qualquer pessoa, mesmo sem experiência prévia com Python ou SQL.
-
+- **Construção de chatbot funcional no Streamlit:** Adaptar a experiência de chat para o Streamlit exigiu criatividade, já que a ferramenta não foi projetada originalmente para fluxos conversacionais dinâmicos. Foi necessário contornar limitações de estado, atualização de interface e controle de histórico para garantir uma experiência fluida e intuitiva ao usuário.
 ---
 
 **Desenvolvido como parte do processo seletivo da Neurotech.**

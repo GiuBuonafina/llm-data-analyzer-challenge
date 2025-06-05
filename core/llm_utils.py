@@ -177,3 +177,95 @@ Do not engage in conversations that are not related to data analysis, business i
         return response.content.strip()
     except Exception as e:
         return f"Desculpe, eu não puder responder devido ao erro: {str(e)}"
+    
+def gerar_codigo_grafico_llm(df, user_message, openai_config):
+    """
+    Gera um código Python para visualização de dados com base no DataFrame e na pergunta do usuário.
+    """
+    llm = AzureChatOpenAI(
+        openai_api_key=openai_config["AZURE_OPENAI_API_KEY"],
+        azure_endpoint=openai_config["AZURE_OPENAI_ENDPOINT"],
+        deployment_name=openai_config["AZURE_OPENAI_DEPLOYMENT_NAME"],
+        openai_api_version=openai_config["AZURE_OPENAI_API_VERSION"],
+        temperature=0.2  
+    )
+    prompt = f"""
+    <|system|>
+    You are a Python data assistant. Your task is to generate a single, clean Python code snippet that produces a relevant data visualization using either matplotlib, seaborn, or plotly, based strictly on the dataset and the user question provided.
+
+    <|instructions|>
+    - Only output a valid Python code block.
+    - Do not include any explanations, comments, or text outside the code block.
+    - The code must be enclosed in triple backticks like this: ```python ... ```
+    - The visualization must be relevant to the user question.
+    - Use the DataFrame variable named `df`.
+    - Assume necessary libraries (pandas, matplotlib, seaborn, plotly) are already imported.
+    - Do not modify the data; use it as-is.
+
+    <|user|>
+    {user_message}
+
+    <|dataframe|>
+    {df.to_markdown()}
+
+    <|assistant|>
+    """
+
+    try:
+        response = llm.invoke(prompt)
+        return response.content.strip()
+    except Exception as e:
+        return f"Desculpe, não pude gerar o gráfico devido ao erro: {str(e)}"
+    
+
+
+def is_safe_plot_code(code: str) -> bool:
+    """
+    Verifica se o código gerado pela LLM contém apenas comandos seguros de plotagem.
+    Permite apenas importações de matplotlib, seaborn, plotly e uso do DataFrame 'df'.
+    """
+    # Não permite comandos perigosos
+    forbidden = [
+        r"import\s+os", r"import\s+sys", r"open\(", r"exec\(", r"eval\(",
+        r"subprocess", r"shutil", r"pickle", r"__import__", r"del\s", r"exit\(",
+        r"quit\(", r"input\(", r"write\(", r"remove\(", r"system\("
+    ]
+    for pattern in forbidden:
+        if re.search(pattern, code, re.IGNORECASE):
+            return False
+
+    # Permite apenas imports de libs de plotagem
+    allowed_imports = [
+        r"import\s+matplotlib\.pyplot\s+as\s+plt",
+        r"import\s+seaborn\s+as\s+sns",
+        r"import\s+plotly\.express\s+as\s+px"
+    ]
+    for line in code.splitlines():
+        if line.strip().startswith("import"):
+            if not any(re.match(imp, line.strip()) for imp in allowed_imports):
+                return False
+
+    # Não permite definições de funções ou classes
+    if re.search(r"def\s+|class\s+", code):
+        return False
+
+    return True
+
+def limpar_codigo_plot(code: str) -> str:
+    """
+    Limpa o código removendo comentários, linhas em branco extras,
+    blocos markdown (```), e aspas triplas.
+    """
+    # Remove blocos markdown e aspas triplas
+    code = re.sub(r"^```[\w]*", "", code, flags=re.MULTILINE)
+    code = code.replace("```", "")
+    code = code.replace('"""', "")
+    code = code.replace("'''", "")
+    # Remove comentários e linhas em branco
+    lines = []
+    for line in code.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        lines.append(line)
+    return "\n".join(lines)
