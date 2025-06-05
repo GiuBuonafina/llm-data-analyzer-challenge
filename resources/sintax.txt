@@ -1,0 +1,49 @@
+
+T-SQL (Transact-SQL)
+    1. BASIC SYNTAX:
+    - Use uppercase for SQL keywords (SELECT, FROM, WHERE, etc.)
+    - Use semicolon (;) at the end of each query
+    - Table and column names in lowercase (or brackets [ ] if needed)
+    - Use single quotes ('') for string values
+    - Avoid using double quotes ("") — prefer brackets for identifiers if necessary
+
+    2. BEST PRACTICES:
+    - Always qualify columns with table aliases in joins
+    - Use WITH (NOLOCK) carefully to avoid locking issues (read uncommitted)
+    - Use aliases (AS) to improve readability
+    - Avoid SELECT *; specify columns explicitly
+    - Use CTEs (Common Table Expressions) for complex queries
+    - Use TRY_CONVERT or TRY_CAST to handle conversion errors safely
+
+    3. FUNCTIONS & FILTERS:
+    - Use GETDATE() for current date and time
+    - Use TOP (N) instead of LIMIT
+    - Use ISNULL(column, value) instead of COALESCE for simple null replacement
+    - Use LEN(column) for string length
+    - Use CHARINDEX(substr, str) instead of POSITION
+    - Use IIF(condition, true_value, false_value) or CASE for conditional logic
+
+    4. PAGINATION:
+    - Use OFFSET-FETCH for paging:
+    SELECT columns FROM table ORDER BY column
+    OFFSET @Start ROWS FETCH NEXT @PageSize ROWS ONLY;
+
+    5. STRING MATCHING:
+    - Use LIKE '%value%' for contains
+    - Use = for exact match
+    - Use NOT LIKE or <> for exclusion
+
+    6. ORDERING & GROUPING:
+    - Always specify ORDER BY when expecting ordered results
+    - GROUP BY must include all non-aggregated columns
+    - Use HAVING for filtering aggregated results
+
+    7. JOINS:
+    - Use INNER JOIN, LEFT JOIN, RIGHT JOIN explicitly
+    - Avoid implicit joins (comma-separated FROM)
+    - Join conditions go in ON clauses
+
+    8. SUBQUERIES:
+    - Enclose subqueries in parentheses
+    - Use aliases for derived tables
+    - Use EXISTS or IN carefully depending on expected behavior

@@ -1,0 +1,26 @@
+    Data Dictionary:
+    REF_DATE: Data de referência do registro.
+
+    TARGET: Indicador binário de inadimplência:
+    1: Mau pagador (atraso > 60 dias dentro de 2 meses);
+    0: Bom pagador.
+
+    VAR2: Gênero do indivíduo:
+    F: Feminino
+    M: Masculino
+    Observação: Contém valores nulos.
+
+    IDADE: Idade do indivíduo.
+
+    VAR4: Flag de óbito do indivíduo:
+    S: Sim (indivíduo falecido)
+    Observação: Contém valores nulos.
+
+    VAR5: Unidade da federação (estado brasileiro):
+    AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT,
+    PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO
+    Observação: Contém valores nulos.
+
+    VAR8: Classe social estimada:
+    A, B, C, D, E (onde A representa classe mais alta e E a mais baixa)
+    Observação: Contém valores nulos.

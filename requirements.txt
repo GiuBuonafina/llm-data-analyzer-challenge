@@ -1,0 +1,8 @@
+python-dotenv
+sqlalchemy
+pandas
+langchain
+langchain-openai
+pyodbc
+tabulate
+pytest
