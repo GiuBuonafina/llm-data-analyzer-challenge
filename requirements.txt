@@ -6,3 +6,4 @@ langchain-openai
 pyodbc
 tabulate
 pytest
+streamlit
