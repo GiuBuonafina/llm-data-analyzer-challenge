@@ -1,5 +1,9 @@
 # LLM Data Analyzer Challenge 🤖
 
+[![Assista à demonstração no YouTube](https://img.youtube.com/vi/KVm4WVmwNno/maxresdefault.jpg)](https://www.youtube.com/watch?v=KVm4WVmwNno)
+
+> 🎥 **Clique na imagem acima para ver a demonstração completa no YouTube!**
+
 Este projeto foi desenvolvido como parte do processo seletivo da **Neurotech**.  
 Seu objetivo é demonstrar a construção de um sistema de análise de dados conversacional, onde o usuário pode interagir via terminal **ou via interface web (Streamlit)** em linguagem natural e obter respostas baseadas em consultas SQL geradas automaticamente por uma LLM (Large Language Model).
 
